@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Yaron</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffebcc;
+            padding: 50px;
+            background-image: url('https://www.transparenttextures.com/patterns/celebration.png');
+        }
+        h1 {
+            color: #d63384;
+            font-size: 3em;
+            text-shadow: 2px 2px 5px #ff99cc;
+        }
+        #countdown {
+            font-size: 2em;
+            color: #333;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            display: inline-block;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .balloons {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0px); }
+            50% { transform: translateY(50vh) translateX(20px); }
+            100% { transform: translateY(-10vh) translateX(-20px); }
+        }
+        .image-container {
+            margin-top: 30px;
+        }
+        .image-container img {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons">
+        <div class="balloon" style="background-color: blue; left: 10%; animation-duration: 6s;"></div>
+        <div class="balloon" style="background-color: red; left: 30%; animation-duration: 7s;"></div>
+        <div class="balloon" style="background-color: yellow; left: 50%; animation-duration: 5s;"></div>
+        <div class="balloon" style="background-color: green; left: 70%; animation-duration: 8s;"></div>
+        <div class="balloon" style="background-color: orange; left: 90%; animation-duration: 6.5s;"></div>
+    </div>
+    <h1>Welcome Yaron</h1>
+    <p>Time remaining until March 27, 2025, 5:00 PM:</p>
+    <div id="countdown">Loading...</div>
+    
+    <div class="image-container">
+        <img src="public/yaron.jpeg" alt="Celebration Image">
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("March 27, 2025 17:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById("countdown").innerText = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left`;
+                } else {
+                    document.getElementById("countdown").innerText = "The countdown has ended!";
+                }
+            }, 1000);
+        }
+
+        updateCountdown();
+    </script>
+</body>
+</html>
