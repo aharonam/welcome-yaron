@@ -8,7 +8,7 @@
     <!-- Open Graph Meta Tags for WhatsApp Preview -->
     <meta property="og:title" content="Welcome Yaron" />
     <meta property="og:description" content="Countdown to March 27, 2025, 5:00 PM! Join the celebration." />
-    <meta property="og:image" content="image.png" />
+    <meta property="og:image" content="public/yaron.jpeg" />
     <meta property="og:url" content="YOUR_WEBSITE_URL" />
     <meta property="og:type" content="website" />
     
@@ -19,6 +19,7 @@
             background-color: #ffebcc;
             padding: 50px;
             background-image: url('https://www.transparenttextures.com/patterns/celebration.png');
+            overflow: hidden;
         }
         h1 {
             color: #d63384;
@@ -35,27 +36,6 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .balloons {
-            position: absolute;
-            width: 100%;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .balloon {
-            position: absolute;
-            width: 50px;
-            height: 70px;
-            background-color: red;
-            border-radius: 50%;
-            animation: float 5s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0px); }
-            50% { transform: translateY(50vh) translateX(20px); }
-            100% { transform: translateY(-10vh) translateX(-20px); }
-        }
         .image-container {
             margin-top: 30px;
         }
@@ -67,13 +47,6 @@
     </style>
 </head>
 <body>
-    <div class="balloons">
-        <div class="balloon" style="background-color: blue; left: 10%; animation-duration: 6s;"></div>
-        <div class="balloon" style="background-color: red; left: 30%; animation-duration: 7s;"></div>
-        <div class="balloon" style="background-color: yellow; left: 50%; animation-duration: 5s;"></div>
-        <div class="balloon" style="background-color: green; left: 70%; animation-duration: 8s;"></div>
-        <div class="balloon" style="background-color: orange; left: 90%; animation-duration: 6.5s;"></div>
-    </div>
     <h1>Welcome Yaron</h1>
     <p>Time remaining until March 27, 2025, 5:00 PM:</p>
     <div id="countdown">Loading...</div>
@@ -82,6 +55,7 @@
         <img src="public/yaron.jpeg" alt="Celebration Image">
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         function updateCountdown() {
             const targetDate = new Date("March 27, 2025 17:00:00").getTime();
@@ -100,8 +74,26 @@
                 }
             }, 1000);
         }
-
         updateCountdown();
+
+        function startConfetti() {
+            setInterval(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff0', '#f00', '#0f0', '#00f', '#ff6347', '#ffa500']
+                });
+            }, 2000);
+        }
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof confetti === "function") {
+                startConfetti();
+            } else {
+                console.error("Confetti function not loaded.");
+            }
+        });
     </script>
 </body>
 </html>
